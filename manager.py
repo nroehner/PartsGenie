@@ -7,16 +7,16 @@ All rights reserved.
 '''
 
 import json
-
 import time
 
 from ice.ice import IceThread
 from parts_genie.parts import PartsThread
-from pathway_genie import sbol_utils, thread_utils
 from plasmid_genie.plasmid import PlasmidThread
+import sbol_utils
+import thread_utils
 
 
-class PathwayGenie():
+class Manager():
     '''Class to run PathwayGenie application.'''
 
     def __init__(self):

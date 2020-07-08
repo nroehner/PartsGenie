@@ -20,8 +20,9 @@ from Bio import Restriction
 from flask import Flask, jsonify, request, Response
 from werkzeug.utils import secure_filename
 
-from pathway_genie import export, ncbi_taxonomy_utils, pathway
-from utils import ice_utils, net_utils, seq_utils
+from ice import export
+import manager
+from utils import ice_utils, ncbi_taxonomy_utils, net_utils, seq_utils
 
 
 # Configuration:
@@ -46,7 +47,7 @@ def _get_organisms():
             if tax_id in valid_ids}
 
 
-_MANAGER = pathway.PathwayGenie()
+_MANAGER = manager.Manager()
 _ORGANISMS = _get_organisms()
 
 DEBUG = False

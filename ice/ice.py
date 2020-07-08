@@ -7,7 +7,7 @@ All rights reserved.
 '''
 # pylint: disable=too-few-public-methods
 # pylint: disable=too-many-arguments
-from pathway_genie.thread_utils import AbstractThread
+from thread_utils import AbstractThread
 from utils import dna_utils, ice_utils, net_utils
 
 

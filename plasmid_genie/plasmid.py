@@ -6,7 +6,7 @@ All rights reserved.
 @author:  neilswainston
 '''
 # pylint: disable=wrong-import-order
-from pathway_genie.thread_utils import AbstractThread
+from thread_utils import AbstractThread
 from utils import dna_utils, ice_utils, pairwise, seq_utils
 
 
