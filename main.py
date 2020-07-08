@@ -18,12 +18,10 @@ import zipfile
 
 from Bio import Restriction
 from flask import Flask, jsonify, request, Response
-from synbiochem.utils import seq_utils
-from synbiochem.utils.net_utils import NetworkError
 from werkzeug.utils import secure_filename
 
-from ice.ice_utils import get_ice_client
 from pathway_genie import export, ncbi_taxonomy_utils, pathway
+from utils import ice_utils, net_utils, seq_utils
 
 
 # Configuration:
@@ -149,7 +147,7 @@ def connect_ice():
     except ConnectionError as err:
         message = 'Unable to connect. Is the URL correct?'
         status_code = 503
-    except NetworkError as err:
+    except net_utils.NetworkError as err:
         message = 'Unable to connect. Are the username and password correct?'
         status_code = err.get_status()
 
@@ -171,7 +169,7 @@ def search_ice():
     except ConnectionError as err:
         message = 'Unable to connect. Is the URL correct?'
         status_code = 503
-    except NetworkError as err:
+    except net_utils.NetworkError as err:
         message = 'Unable to connect. Are the username and password correct?'
         status_code = err.get_status()
 
@@ -214,9 +212,9 @@ def _connect_ice(req):
     '''Connects to ICE.'''
     data = json.loads(req.data)
 
-    return get_ice_client(data['ice']['url'],
-                          data['ice']['username'],
-                          data['ice']['password'])
+    return ice_utils.get_ice_client(data['ice']['url'],
+                                    data['ice']['username'],
+                                    data['ice']['password'])
 
 
 def _save_export(dfs):

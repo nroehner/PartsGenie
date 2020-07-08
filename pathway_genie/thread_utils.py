@@ -5,14 +5,16 @@ All rights reserved.
 
 @author:  neilswainston
 '''
-from synbiochem.utils.job import JobThread
+# pylint: disable=too-few-public-methods
+from threading import Thread
+from utils import job_utils
 
 
-class PathwayThread(JobThread):
-    '''A PathwayThread base class.'''
+class AbstractThread(job_utils.JobThread):
+    '''An AbstractThread base class.'''
 
     def __init__(self, query):
-        JobThread.__init__(self)
+        job_utils.JobThread.__init__(self)
 
         self._query = query
         self._results = []
@@ -32,3 +34,16 @@ class PathwayThread(JobThread):
             event['result'] = self._results
 
         self._fire_event(event)
+
+
+class ThreadPool(Thread):
+    '''Basic class to run job Threads sequentially.'''
+
+    def __init__(self, threads):
+        self.__threads = threads
+        Thread.__init__(self)
+
+    def run(self):
+        for thread in self.__threads:
+            thread.start()
+            thread.join()

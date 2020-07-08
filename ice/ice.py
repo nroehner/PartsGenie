@@ -5,19 +5,17 @@ All rights reserved.
 
 @author:  neilswainston
 '''
+# pylint: disable=too-few-public-methods
 # pylint: disable=too-many-arguments
-from synbiochem.utils import dna_utils
-from synbiochem.utils.net_utils import NetworkError
-
-from ice.ice_utils import get_ice_client, DNAWriter, ICEEntry
-from pathway_genie.utils import PathwayThread
+from pathway_genie.thread_utils import AbstractThread
+from utils import dna_utils, ice_utils, net_utils
 
 
-class IceThread(PathwayThread):
+class IceThread(AbstractThread):
     '''Runs a save-to-ICE job.'''
 
     def __init__(self, query):
-        PathwayThread.__init__(self, query)
+        AbstractThread.__init__(self, query)
 
         group_name = self._query['ice'].get('groups', None)
         self.__group_names = [group_name] if group_name else []
@@ -27,12 +25,13 @@ class IceThread(PathwayThread):
         keys = ['part', 'plasmid', 'strain']
 
         try:
-            ice_client = get_ice_client(self._query['ice']['url'],
-                                        self._query['ice']['username'],
-                                        self._query['ice']['password'],
-                                        group_names=self.__group_names)
+            ice_client = ice_utils.get_ice_client(
+                self._query['ice']['url'],
+                self._query['ice']['username'],
+                self._query['ice']['password'],
+                group_names=self.__group_names)
 
-            dna_writer = DNAWriter(ice_client)
+            dna_writer = ice_utils.DNAWriter(ice_client)
 
             iteration = 0
 
@@ -61,7 +60,7 @@ class IceThread(PathwayThread):
             else:
                 self._fire_designs_event('finished', iteration,
                                          message='Job completed')
-        except NetworkError as err:
+        except net_utils.NetworkError as err:
             self._fire_designs_event('error', iteration,
                                      message=err.get_text())
         finally:
@@ -106,7 +105,7 @@ def write_ice_entry(ice_client, ice_id1, ice_id2, typ, write_seq, group_names):
     name = comp1.get_metadata()['name'] + \
         ' (' + comp2.get_metadata()['name'] + ')'
 
-    product = ICEEntry(typ=typ)
+    product = ice_utils.ICEEntry(typ=typ)
     product.set_values({'name': name[:127], 'shortDescription': name})
 
     taxonomy = comp1.get_parameter('Taxonomy')

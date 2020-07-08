@@ -1,1 +1,1 @@
-gcloud app deploy
+gcloud beta app deploy

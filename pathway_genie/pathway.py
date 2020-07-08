@@ -5,13 +5,14 @@ All rights reserved.
 
 @author:  neilswainston
 '''
+
 import json
-from threading import Thread
+
 import time
 
-import ice.ice
+from ice.ice import IceThread
 from parts_genie.parts import PartsThread
-from pathway_genie import sbol_utils
+from pathway_genie import sbol_utils, thread_utils
 from plasmid_genie.plasmid import PlasmidThread
 
 
@@ -32,7 +33,7 @@ class PathwayGenie():
 
         # Do job in new thread, return result when completed:
         job_ids = []
-        threads = self.__get_threads(query)
+        threads = _get_threads(query)
 
         for thread in threads:
             job_id = thread.get_job_id()
@@ -41,7 +42,7 @@ class PathwayGenie():
             self.__threads[job_id] = thread
 
         # Start new Threads:
-        thread_pool = ThreadPool(threads)
+        thread_pool = thread_utils.ThreadPool(threads)
         thread_pool.start()
 
         return job_ids
@@ -74,32 +75,20 @@ class PathwayGenie():
         '''Returns current progress for job id.'''
         return json.dumps(self.__status[job_id])
 
-    def __get_threads(self, query):
-        '''Get threads.'''
-        app = query.get('app', 'undefined')
 
-        if app == 'PartsGenie':
-            return [PartsThread(query, idx)
-                    for idx in range(len(query['designs']))]
-        if app == 'PlasmidGenie':
-            return [PlasmidThread(query)]
-        if app == 'save':
-            return [ice.ice.IceThread(query)]
+def _get_threads(query):
+    '''Get threads.'''
+    app = query.get('app', 'undefined')
 
-        raise ValueError('Unknown app: ' + app)
+    if app == 'PartsGenie':
+        return [PartsThread(query, idx)
+                for idx in range(len(query['designs']))]
+    if app == 'PlasmidGenie':
+        return [PlasmidThread(query)]
+    if app == 'save':
+        return [IceThread(query)]
 
-
-class ThreadPool(Thread):
-    '''Basic class to run job Threads sequentially.'''
-
-    def __init__(self, threads):
-        self.__threads = threads
-        Thread.__init__(self)
-
-    def run(self):
-        for thread in self.__threads:
-            thread.start()
-            thread.join()
+    raise ValueError('Unknown app: ' + app)
 
 
 def _get_query(filenames, taxonomy_id):

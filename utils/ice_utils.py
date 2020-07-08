@@ -17,7 +17,7 @@ import tempfile
 import traceback
 from xml.etree.ElementTree import ParseError
 
-from synbiochem.utils import dna_utils, net_utils, sbol_utils
+from utils import dna_utils, net_utils, sbol_utils
 
 
 _DEFAULT_ID_PREFIX = 'SBC'

@@ -8,10 +8,8 @@ All rights reserved.
 # pylint: disable=consider-using-set-comprehension
 # pylint: disable=invalid-name
 # pylint: disable=wrong-import-order
-from synbiochem.utils import dna_utils
-
-from ice.ice_utils import get_ice_id
 import pandas as pd
+from utils import dna_utils, ice_utils
 
 
 def export(ice_client, data):
@@ -78,7 +76,7 @@ def _export_dominoes(ice_client, data):
 def _get_ice_id(link, idx):
     '''Get ICE id.'''
     if idx < len(link):
-        return get_ice_id(link[idx].split('/')[-1])
+        return ice_utils.get_ice_id(link[idx].split('/')[-1])
 
     return None
 

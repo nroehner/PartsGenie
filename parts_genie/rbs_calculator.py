@@ -15,9 +15,9 @@ import random
 import re
 
 from Bio.Seq import Seq
-from synbiochem.utils import seq_utils
 
 from parts_genie.nucl_acid_utils import NuclAcidCalcRunner
+from utils import seq_utils
 
 
 _START_CODON_PATT = r'(?=([ACGT]TG))'

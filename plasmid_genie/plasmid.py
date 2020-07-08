@@ -6,18 +6,15 @@ All rights reserved.
 @author:  neilswainston
 '''
 # pylint: disable=wrong-import-order
-from synbiochem.utils import dna_utils, pairwise, seq_utils
-from synbiochem.utils.seq_utils import get_seq_by_melt_temp
-
-from ice.ice_utils import get_ice_client
-from pathway_genie.utils import PathwayThread
+from pathway_genie.thread_utils import AbstractThread
+from utils import dna_utils, ice_utils, pairwise, seq_utils
 
 
-class PlasmidThread(PathwayThread):
+class PlasmidThread(AbstractThread):
     '''Runs a PlasmidGenie job.'''
 
     def __init__(self, query):
-        PathwayThread.__init__(self, query)
+        AbstractThread.__init__(self, query)
 
     def run(self):
         '''Designs dominoes (bridging oligos) for LCR.'''
@@ -96,7 +93,7 @@ class PlasmidThread(PathwayThread):
     def __get_component(self, ice_id):
         '''Gets a DNA component from ICE.'''
         try:
-            ice_client = get_ice_client(
+            ice_client = ice_utils.get_ice_client(
                 self._query['ice']['url'],
                 self._query['ice']['username'],
                 self._query['ice']['password'],
@@ -121,10 +118,10 @@ class PlasmidThread(PathwayThread):
         target_melt_temp = self._query['melt_temp']
         reag_concs = self._query.get('reagent_concs', None)
 
-        seq, melt_temp = get_seq_by_melt_temp(comp['seq'],
-                                              target_melt_temp,
-                                              forward,
-                                              reag_concs)
+        seq, melt_temp = seq_utils.get_seq_by_melt_temp(comp['seq'],
+                                                        target_melt_temp,
+                                                        forward,
+                                                        reag_concs)
 
         # Flip name and description for Dominoes:
         dna = dna_utils.DNA(name=comp['desc'],

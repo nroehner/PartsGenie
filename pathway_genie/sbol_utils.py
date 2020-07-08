@@ -6,8 +6,8 @@ All rights reserved.
 @author:  neilswainston
 '''
 from sbol import Document, SO_CDS, SO_RBS
-from synbiochem.utils import dna_utils
-from synbiochem.utils.seq_utils import get_uniprot_values
+
+from utils import dna_utils, seq_utils
 
 
 def to_query(filename, taxonomy_id):
@@ -102,7 +102,7 @@ def _get_feature(comp_def):
     if SO_CDS in comp_def.roles:
         # CDS:
         uniprot_id = comp_def.displayId.split('_')[0]
-        uniprot_vals = get_uniprot_values([uniprot_id], ['sequence'])
+        uniprot_vals = seq_utils.get_uniprot_values([uniprot_id], ['sequence'])
 
         if uniprot_id not in uniprot_vals:
             raise ValueError('Uniprot id not found: %s' % uniprot_id)
