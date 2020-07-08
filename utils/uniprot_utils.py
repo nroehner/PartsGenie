@@ -11,7 +11,7 @@ import re
 import urllib
 import requests
 
-from synbiochem.utils import thread_utils
+from utils import thread_utils
 
 
 def get_uniprot_values(uniprot_ids, fields, batch_size=128, verbose=False,

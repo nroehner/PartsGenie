@@ -1,6 +1,6 @@
 iceApp.factory("ICEService", ["$http", "$rootScope", "$uibModal", function($http, $rootScope, $uibModal) {
 	var obj = {};
-	obj.ice = {'url': 'https://ice.synbiochem.co.uk',
+	obj.ice = {'url': 'https://public-registry.jbei.org/',
 			'username': null,
 			'password': null,
 			'groups': null};
