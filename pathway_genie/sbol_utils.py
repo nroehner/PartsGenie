@@ -5,10 +5,9 @@ All rights reserved.
 
 @author:  neilswainston
 '''
+from sbol import Document, SO_CDS, SO_RBS
 from synbiochem.utils import dna_utils
 from synbiochem.utils.seq_utils import get_uniprot_values
-
-from sbol import Document, SO_CDS, SO_RBS
 
 
 def to_query(filename, taxonomy_id):

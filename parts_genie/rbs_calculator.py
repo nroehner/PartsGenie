@@ -1,9 +1,7 @@
 '''
-PathwayGenie (c) GeneGenie Bioinformatics Ltd. 2018
+PartsGenie (c) GeneGenie Bioinformatics Ltd. 2020
 
-PathwayGenie is licensed under the MIT License.
-
-To view a copy of this license, visit <http://opensource.org/licenses/MIT/>.
+All rights reserved.
 
 @author:  neilswainston
 '''
