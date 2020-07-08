@@ -22,7 +22,8 @@ from werkzeug.utils import secure_filename
 
 from ice import export
 import manager
-from utils import ice_utils, ncbi_taxonomy_utils, net_utils, seq_utils
+from utils import codon_utils, ice_utils, ncbi_taxonomy_utils, net_utils, \
+    uniprot_utils
 
 
 # Configuration:
@@ -40,7 +41,8 @@ app.config['UPLOAD_FOLDER'] = tempfile.gettempdir()
 
 def _get_organisms():
     '''Get all valid organisms (bacterial with codon usage tables).'''
-    organisms = seq_utils.get_codon_usage_organisms(expand=True, verbose=True)
+    organisms = codon_utils.get_codon_usage_organisms(
+        expand=True, verbose=True)
     bacterial_ids = ncbi_taxonomy_utils.get_taxonomy_ids('2', 'data')
     valid_ids = set(organisms.values()).intersection(set(bacterial_ids))
     return {name: tax_id for name, tax_id in organisms.items()
@@ -184,7 +186,7 @@ def search_uniprot(query):
     '''Search Uniprot.'''
     fields = ['entry name', 'protein names', 'sequence', 'ec', 'organism',
               'organism-id']
-    result = seq_utils.search_uniprot(query, fields)
+    result = uniprot_utils.search_uniprot(query, fields)
     return json.dumps(result)
 
 

@@ -5,8 +5,6 @@ All rights reserved.
 
 @author:  neilswainston
 '''
-# pylint: disable=no-member
-# pylint: disable=too-many-public-methods
 import os
 import tempfile
 import unittest

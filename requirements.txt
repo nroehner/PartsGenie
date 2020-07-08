@@ -2,4 +2,3 @@ cython
 Flask
 gunicorn
 pySBOL
-synbiochem-py

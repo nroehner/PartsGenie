@@ -5,9 +5,6 @@ All rights reserved.
 
 @author:  neilswainston
 '''
-# pylint: disable=no-member
-# pylint: disable=redundant-unittest-assert
-# pylint: disable=too-many-public-methods
 import getpass
 import os
 import unittest
@@ -265,8 +262,7 @@ class TestICEClient(unittest.TestCase):
         for group_num in groups.values():
             self.__ice_client.add_permission(ice_entry.get_ice_id(), group_num)
 
-        # If test progresses to here, it has succeeded:
-        self.assertTrue(True)
+        # If test progresses to here, it has succeeded...
 
     def test_search(self):
         '''Tests search method.'''

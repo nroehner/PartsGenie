@@ -12,11 +12,9 @@ import copy
 from itertools import product
 import math
 
-from synbiochem.optimisation.sim_ann import SimulatedAnnealer
-
-from parts_genie import rbs_calculator as rbs_calc
-from parts_genie import vienna_utils as calc
-from utils import dna_utils, seq_utils
+from parts_genie import rbs_calculator, vienna_utils
+from utils import codon_utils, dna_utils, seq_utils
+from utils.optim.sim_ann import SimulatedAnnealer
 
 
 class PartsSolution():
@@ -32,10 +30,11 @@ class PartsSolution():
         self.__filters['gc_min'] = float(self.__filters['gc_min'])
         self.__filters['gc_max'] = float(self.__filters['gc_max'])
 
-        self.__calc = rbs_calc.RbsCalculator(organism['r_rna'], calc) \
+        self.__calc = rbs_calculator.RbsCalculator(
+            organism['r_rna'], vienna_utils) \
             if self.__organism else None
 
-        self.__cod_opt = seq_utils.CodonOptimiser(organism['taxonomy_id']) \
+        self.__cod_opt = codon_utils.CodonOptimiser(organism['taxonomy_id']) \
             if self.__organism else None
 
         self.__dna_new = None
