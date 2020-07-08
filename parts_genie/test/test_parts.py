@@ -13,7 +13,7 @@ import time
 import unittest
 
 from parts_genie.parts import PartsThread
-import sbol_utils
+from parts_genie import sbol_utils
 
 
 class TestPartsThread(unittest.TestCase):

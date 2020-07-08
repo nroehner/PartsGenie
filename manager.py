@@ -10,9 +10,9 @@ import json
 import time
 
 from ice.ice import IceThread
+from parts_genie import sbol_utils
 from parts_genie.parts import PartsThread
 from plasmid_genie.plasmid import PlasmidThread
-import sbol_utils
 import thread_utils
 
 
@@ -27,7 +27,7 @@ class Manager():
     def submit(self, data, taxonomy_id=None, sbol=False):
         '''Responds to submission.'''
         if sbol:
-            query = _get_query(data, taxonomy_id)
+            query = sbol_utils.to_query(data[0], taxonomy_id)
         else:
             query = json.loads(data)
 
@@ -89,10 +89,3 @@ def _get_threads(query):
         return [IceThread(query)]
 
     raise ValueError('Unknown app: ' + app)
-
-
-def _get_query(filenames, taxonomy_id):
-    '''Get query.'''
-    query = sbol_utils.to_query(filenames[0], taxonomy_id)
-    print(query)
-    return query
