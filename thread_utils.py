@@ -7,7 +7,7 @@ All rights reserved.
 '''
 # pylint: disable=too-few-public-methods
 from threading import Thread
-from utils import job_utils
+from genegeniebio.utils import job_utils
 
 
 class AbstractThread(job_utils.JobThread):

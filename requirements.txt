@@ -2,3 +2,4 @@ cython
 Flask
 gunicorn
 pySBOL
+git+https://github.com/genegeniebio/genegeniebio-utils

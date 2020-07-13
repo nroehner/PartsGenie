@@ -8,8 +8,9 @@ All rights reserved.
 # pylint: disable=consider-using-set-comprehension
 # pylint: disable=invalid-name
 # pylint: disable=wrong-import-order
+from genegeniebio.utils import dna_utils, ice_utils
+
 import pandas as pd
-from utils import dna_utils, ice_utils
 
 
 def export(ice_client, data):

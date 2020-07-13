@@ -6,15 +6,17 @@ All rights reserved.
 @author:  neilswainston
 '''
 # pylint: disable=no-self-use
+# pylint: disable=too-few-public-methods
 # pylint: disable=wrong-import-order
 import collections
 import copy
 from itertools import product
 import math
 
+from genegeniebio.utils import dna_utils, optim, seq_utils
+
+from codon_genie import codon_utils
 from parts_genie import rbs_calculator, vienna_utils
-from utils import codon_utils, dna_utils, seq_utils
-from utils.optim.sim_ann import SimulatedAnnealer
 
 
 class PartsSolution():
@@ -369,7 +371,8 @@ class PartsThread(SimulatedAnnealer):
                                  query.get('organism', None),
                                  query['filters'])
 
-        SimulatedAnnealer.__init__(self, solution, verbose=verbose)
+        optim.sim_ann.SimulatedAnnealer.__init__(self, solution,
+                                                 verbose=verbose)
 
 
 def _mean(lst):
