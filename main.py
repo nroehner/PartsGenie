@@ -18,15 +18,13 @@ import zipfile
 
 from Bio import Restriction
 from flask import Flask, jsonify, request, Response
-from genegeniebio.utils import ice_utils, ncbi_tax_utils, net_utils, \
-    uniprot_utils
 from werkzeug.utils import secure_filename
 
-# from codon_genie import codon_utils
+from genegeniebio.utils import ice_utils, net_utils, uniprot_utils
 from ice import export
 import manager
-
-
+import organisms
+# from codon_genie import codon_utils
 # Configuration:
 SECRET_KEY = str(uuid.uuid4())
 
@@ -40,17 +38,8 @@ app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024 * 1024
 app.config['UPLOAD_FOLDER'] = tempfile.gettempdir()
 
 
-def _get_organisms():
-    '''Get all valid organisms (bacterial with codon usage tables).'''
-    organisms = codon_utils.get_codon_usage_organisms(expand=True)
-    bacterial_ids = ncbi_tax_utils.TaxonomyFactory().get_child_ids('2')
-    valid_ids = set(organisms.values()).intersection(set(bacterial_ids))
-    return {name: tax_id for name, tax_id in organisms.items()
-            if tax_id in valid_ids}
-
-
 _MANAGER = manager.Manager()
-_ORGANISMS = _get_organisms()
+_ORGANISMS = organisms.get_organisms()
 
 DEBUG = False
 TESTING = False

@@ -1,4 +1,5 @@
 cython
+pandas
 Flask
 gunicorn
 pySBOL

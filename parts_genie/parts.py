@@ -13,9 +13,8 @@ import copy
 from itertools import product
 import math
 
-from genegeniebio.utils import dna_utils, optim, seq_utils
-
-from codon_genie import codon_utils
+from genegeniebio.utils import codon_utils, dna_utils, seq_utils
+from genegeniebio.utils.optim.sim_ann import SimulatedAnnealer
 from parts_genie import rbs_calculator, vienna_utils
 
 
@@ -371,8 +370,8 @@ class PartsThread(SimulatedAnnealer):
                                  query.get('organism', None),
                                  query['filters'])
 
-        optim.sim_ann.SimulatedAnnealer.__init__(self, solution,
-                                                 verbose=verbose)
+        SimulatedAnnealer.__init__(self, solution,
+                                   verbose=verbose)
 
 
 def _mean(lst):
