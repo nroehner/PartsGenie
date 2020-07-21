@@ -402,6 +402,9 @@ def _get_gc_var(seqs, window_size=50, tol=0.52):
         local_gcs = sorted([_get_gc(seq[idx:idx + window_size])
                             for idx in range(len(seq) - window_size + 1)])
 
+        if not local_gcs:
+            local_gcs = [_get_gc(seq)]
+
         if local_gcs[-1] - local_gcs[0] > tol:
             local_gc_var += 1
 
