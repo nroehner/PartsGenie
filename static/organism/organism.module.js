@@ -1,0 +1,1 @@
+var organismApp = angular.module("organismApp", ["ngAnimate", "ui.bootstrap"]);

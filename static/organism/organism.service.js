@@ -1,4 +1,4 @@
-typeaheadApp.factory("TypeaheadService", ["$http", "ErrorService", function($http, ErrorService) {
+organismApp.factory("OrganismService", ["$http", "ErrorService", function($http, ErrorService) {
 	var obj = {};
 	
 	obj.getItem = function(url, terms) {

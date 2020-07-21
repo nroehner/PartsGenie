@@ -1,1 +1,0 @@
-var typeaheadApp = angular.module("typeaheadApp", ["ngAnimate", "ui.bootstrap"]);

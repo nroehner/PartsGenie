@@ -31,24 +31,24 @@
 							bulk-uniprot="ctrl.bulkUniprot(args)"
 							pagination="ctrl.pagination">
 						</design-panel>
-						<div class="panel-body" data-ng-controller="typeaheadCtrl as typeahead_ctrl">
+						<div class="panel-body" data-ng-controller="organismCtrl as organism_ctrl">
 							<div class="form-group">
 								<label class="col-xs-4 col-form-label">Superkingdom:</label>
 								<div class="col-xs-8">
-									<label class="radio-inline"><input data-ng-model="typeahead_ctrl.parent_id" data-ng-required="ctrl.organismRequired()" type="radio" value="2157">Archaea</label>
-									<label class="radio-inline"><input data-ng-model="typeahead_ctrl.parent_id" data-ng-required="ctrl.organismRequired()" type="radio" value="2">Bacteria</label>
-									<label class="radio-inline"><input data-ng-model="typeahead_ctrl.parent_id" data-ng-required="ctrl.organismRequired()" type="radio" value="2759">Eukaryota</label>
+									<label class="radio-inline"><input data-ng-model="organism_ctrl.parent_id" data-ng-required="ctrl.organismRequired()" type="radio" value="2157">Archaea</label>
+									<label class="radio-inline"><input data-ng-model="organism_ctrl.parent_id" data-ng-required="ctrl.organismRequired()" type="radio" value="2">Bacteria</label>
+									<label class="radio-inline"><input data-ng-model="organism_ctrl.parent_id" data-ng-required="ctrl.organismRequired()" type="radio" value="2759">Eukaryota</label>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-xs-4 col-form-label">Organism:</label>
 								<div class="col-xs-8">
 									<input type="text" class="form-control"
-										data-ng-init="typeahead_ctrl.url='/organisms/'"
+										data-ng-init="organism_ctrl.url='/organisms/'"
 										data-ng-model="ctrl.query.organism"
 										data-ng-required="ctrl.organismRequired()"
 										placeholder="Select host organism" required autocomplete="off"
-										uib-typeahead="organism as organism.name for organism in typeahead_ctrl.getItem({'term': $viewValue})"
+										uib-typeahead="organism as organism.name for organism in organism_ctrl.getItem({'term': $viewValue})"
 										typeahead-min-length="3" typeahead-editable="false">
 								</div>
 							</div>
