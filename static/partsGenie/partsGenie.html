@@ -31,10 +31,18 @@
 							bulk-uniprot="ctrl.bulkUniprot(args)"
 							pagination="ctrl.pagination">
 						</design-panel>
-						<div class="panel-body">
+						<div class="panel-body" data-ng-controller="typeaheadCtrl as typeahead_ctrl">
+							<div class="form-group">
+								<label class="col-xs-4 col-form-label">Superkingdom:</label>
+								<div class="col-xs-8">
+									<label class="radio-inline"><input data-ng-model="typeahead_ctrl.parent_id" data-ng-required="ctrl.organismRequired()" type="radio" value="2157">Archaea</label>
+									<label class="radio-inline"><input data-ng-model="typeahead_ctrl.parent_id" data-ng-required="ctrl.organismRequired()" type="radio" value="2">Bacteria</label>
+									<label class="radio-inline"><input data-ng-model="typeahead_ctrl.parent_id" data-ng-required="ctrl.organismRequired()" type="radio" value="2759">Eukaryota</label>
+								</div>
+							</div>
 							<div class="form-group">
 								<label class="col-xs-4 col-form-label">Organism:</label>
-								<div class="col-xs-8" data-ng-controller="typeaheadCtrl as typeahead_ctrl">
+								<div class="col-xs-8">
 									<input type="text" class="form-control"
 										data-ng-init="typeahead_ctrl.url='/organisms/'"
 										data-ng-model="ctrl.query.organism"

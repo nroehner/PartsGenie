@@ -39,7 +39,13 @@ app.config['UPLOAD_FOLDER'] = tempfile.gettempdir()
 
 
 _MANAGER = manager.Manager()
-_ORGANISMS = organisms.get_organisms()
+
+_ORG_PARENT_IDS = {'2157': 'Archaea',
+                   '2': 'Bacteria',
+                   '2759': 'Eukaryota'}
+
+_ORGANISMS = {parent_id: organisms.get_organisms(parent_id)
+              for parent_id in _ORG_PARENT_IDS}
 
 DEBUG = False
 TESTING = False
@@ -108,6 +114,12 @@ def get_groups():
         ice_client.close()
 
 
+@app.route('/organism_parents/')
+def get_organism_parents():
+    '''Get organism parents.'''
+    return json.dumps(_ORG_PARENT_IDS)
+
+
 @app.route('/organisms/', methods=['POST'])
 def get_organisms():
     '''Gets organisms from search term.
@@ -118,7 +130,7 @@ def get_organisms():
     data = [{'taxonomy_id': taxonomy_id,
              'name': name,
              'r_rna': 'acctccttt'}
-            for name, taxonomy_id in _ORGANISMS.items()
+            for name, taxonomy_id in _ORGANISMS[query['parent_id']].items()
             if query['term'].lower() in name.lower()]
 
     return json.dumps(data)
