@@ -19,10 +19,15 @@ designApp.directive("designPanel", function($timeout) {
         		return scope.query().designs;
         	},               
         	function(designs) {
-        		$timeout(checkValidity(scope, designs));
+        		$timeout(setValidity(scope, designs));
         	}, true);
         	
-        	checkValidity = function(scope, designs) {
+        	setValidity = function(scope, designs) {
+        		var valid = checkValidity(designs);
+        		scope.$parent.form.$setValidity("valid", valid);
+        	}
+        	
+        	checkValidity = function(designs) {
         		var valid = true;
         		
         		for(var i = 0; i < designs.length; i++) {
@@ -33,18 +38,19 @@ designApp.directive("designPanel", function($timeout) {
         				
         				// If RBS not followed by CDS:
         				if(feature.typ == "http://identifiers.org/so/SO:0000139") {
-        					feature.temp_params.valid = j != design.features.length - 1
-        						&& design.features[j + 1].typ == "http://identifiers.org/so/SO:0000316";
+        					var is_cds_next = j != design.features.length - 1
+    							&& design.features[j + 1].typ == "http://identifiers.org/so/SO:0000316";
+        					
+        					feature.temp_params.valid = is_cds_next;
         				}
         				
         				if(!feature.temp_params.valid) {
-        					var id = feature.temp_params.id;
         					valid = false;
         				}
         			}
         		}
         		
-        		scope.$parent.form.$setValidity("valid", valid);
+        		return valid;
         	}
         }
     };
