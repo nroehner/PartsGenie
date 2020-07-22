@@ -1,9 +1,10 @@
-partsGenieApp.controller("partsGenieCtrl", ["$scope", "$uibModal", "ErrorService", "PartsGenieService", "PathwayGenieService", "ProgressService", "ResultService", "UniprotService", function($scope, $uibModal, ErrorService, PartsGenieService, PathwayGenieService, ProgressService, ResultService, UniprotService) {
+partsGenieApp.controller("partsGenieCtrl", ["$scope", "$timeout", "$uibModal", "ErrorService", "PartsGenieService", "PathwayGenieService", "ProgressService", "ResultService", "UniprotService", function($scope, $timeout, $uibModal, ErrorService, PartsGenieService, PathwayGenieService, ProgressService, ResultService, UniprotService) {
 	var self = this;
 	var jobIds = [];
 	var jobId = null;
 	var search = false;
 	var nucl_regex = new RegExp("^[ACGTacgt ]+$");
+	var valid = false;
 	
 	self.codons_regex = new RegExp("^[ACGTacgt\s]{3}$");
 	self.query = PartsGenieService.query;
@@ -283,6 +284,10 @@ partsGenieApp.controller("partsGenieCtrl", ["$scope", "$uibModal", "ErrorService
 		return self.response.update;
 	};
 	
+	self.valid = function() {
+		return valid;
+	}
+	
 	listen = function() {
 		if(jobIds.length == 0) {
 			return;
@@ -354,6 +359,30 @@ partsGenieApp.controller("partsGenieCtrl", ["$scope", "$uibModal", "ErrorService
 				});
 	}
 	
+	setValidity = function(designs) {
+		valid = true;
+		
+		for(var i = 0; i < designs.length; i++) {
+			design = designs[i];
+			
+			for(var j = 0; j < design.features.length; j++) {
+				feature = design.features[j];
+				
+				// If RBS not followed by CDS:
+				if(feature.typ == "http://identifiers.org/so/SO:0000139") {
+					var is_cds_next = j != design.features.length - 1
+						&& design.features[j + 1].typ == "http://identifiers.org/so/SO:0000316";
+					
+					feature.temp_params.valid = is_cds_next;
+				}
+				
+				if(!feature.temp_params.valid) {
+					valid = false;
+				}
+			}
+		}
+	}
+	
 	self.queryJson = angular.toJson({selected: self.selected(), query: self.query}, true);
 	
 	$scope.$watch(function() {
@@ -375,5 +404,12 @@ partsGenieApp.controller("partsGenieCtrl", ["$scope", "$uibModal", "ErrorService
 	},               
 	function(values) {
 		PartsGenieService.selected = null;
+	}, true);
+	
+	$scope.$watch(function() {
+		return self.query.designs;
+	},               
+	function(designs) {
+		setValidity(designs);
 	}, true);
 }]);
