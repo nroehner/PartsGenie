@@ -1,7 +1,11 @@
 organismApp.factory("OrganismService", ["$http", "ErrorService", function($http, ErrorService) {
 	var obj = {};
 	
-	obj.parent_id = "2";
+	obj.parentId = ["2"];
+	
+	obj.getParentId = function() {
+		return obj.parentId[0];
+	}
 	
 	obj.getItem = function(url, terms) {
 		return $http.post(url, terms).then(

@@ -1,4 +1,4 @@
-partsGenieApp.controller("partsGenieCtrl", ["$scope", "$timeout", "$uibModal", "ErrorService", "PartsGenieService", "PathwayGenieService", "ProgressService", "ResultService", "UniprotService", function($scope, $timeout, $uibModal, ErrorService, PartsGenieService, PathwayGenieService, ProgressService, ResultService, UniprotService) {
+partsGenieApp.controller("partsGenieCtrl", ["$scope", "$timeout", "$uibModal", "ErrorService", "OrganismService", "PartsGenieService", "PathwayGenieService", "ProgressService", "ResultService", "UniprotService", function($scope, $timeout, $uibModal, ErrorService, OrganismService, PartsGenieService, PathwayGenieService, ProgressService, ResultService, UniprotService) {
 	var self = this;
 	var jobIds = [];
 	var jobId = null;
@@ -288,6 +288,8 @@ partsGenieApp.controller("partsGenieCtrl", ["$scope", "$timeout", "$uibModal", "
 		return valid;
 	}
 	
+	self.queryJson = angular.toJson({selected: self.selected(), query: self.query}, true);
+	
 	listen = function() {
 		if(jobIds.length == 0) {
 			return;
@@ -359,11 +361,11 @@ partsGenieApp.controller("partsGenieCtrl", ["$scope", "$timeout", "$uibModal", "
 				});
 	}
 	
-	setValidity = function(designs) {
+	setValidity = function() {
 		valid = true;
 		
-		for(var i = 0; i < designs.length; i++) {
-			design = designs[i];
+		for(var i = 0; i < self.query.designs.length; i++) {
+			design = self.query.designs[i];
 			
 			for(var j = 0; j < design.features.length; j++) {
 				feature = design.features[j];
@@ -373,7 +375,7 @@ partsGenieApp.controller("partsGenieCtrl", ["$scope", "$timeout", "$uibModal", "
 					var is_cds_next = j != design.features.length - 1
 						&& design.features[j + 1].typ == "http://identifiers.org/so/SO:0000316";
 					
-					feature.temp_params.valid = is_cds_next;
+					feature.temp_params.valid = is_cds_next && OrganismService.getParentId() != "2759";
 				}
 				
 				if(!feature.temp_params.valid) {
@@ -382,8 +384,6 @@ partsGenieApp.controller("partsGenieCtrl", ["$scope", "$timeout", "$uibModal", "
 			}
 		}
 	}
-	
-	self.queryJson = angular.toJson({selected: self.selected(), query: self.query}, true);
 	
 	$scope.$watch(function() {
 		return self.selected();
@@ -409,7 +409,15 @@ partsGenieApp.controller("partsGenieCtrl", ["$scope", "$timeout", "$uibModal", "
 	$scope.$watch(function() {
 		return self.query.designs;
 	},               
-	function(designs) {
-		setValidity(designs);
+	function(values) {
+		setValidity();
 	}, true);
+	
+	$scope.$watch(function() {
+		return OrganismService.getParentId();
+	},               
+	function(values) {
+		setValidity();
+	}, true);
+	
 }]);

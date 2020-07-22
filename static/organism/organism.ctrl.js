@@ -2,10 +2,10 @@ organismApp.controller("organismCtrl", ["OrganismService", function(OrganismServ
 	var self = this;
 	self.url = null;
 	
-	self.parent_id = OrganismService.parent_id;
-
+	self.parentId = OrganismService.parentId;
+	
 	self.getItem = function(terms) {
-		terms["parent_id"] = self.parent_id;
+		terms["parent_id"] = OrganismService.getParentId();
 		return OrganismService.getItem(self.url, terms);
 	};
 }]);
