@@ -1,0 +1,1 @@
+var cdsTermsApp = angular.module("cdsTermsApp", []);

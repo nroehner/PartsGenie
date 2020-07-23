@@ -195,19 +195,19 @@ partsGenieApp.controller("partsGenieCtrl", ["$scope", "$timeout", "$uibModal", "
 		return copiedDesign;
 	};
 	
-	self.bulkUniprot = function(feature_idx) {
+	self.bulkCds = function(feature_idx) {
 		search = true;
 		
 		$uibModal.open({
 			animation: true,
 			ariaLabelledBy: 'modal-title',
 			ariaDescribedBy: 'modal-body',
-			templateUrl: '/static/uniprot/uniprotTerms.html',
-			controller: 'uniprotTermsCtrl',
+			templateUrl: '/static/cds/cdsTerms.html',
+			controller: 'cdsTermsCtrl',
 			controllerAs: 'ctrl',
-		}).result.then(function(uniprotIds) {
-			for(var i = 0; i < uniprotIds.length; i++) {
-            	autoUniprot(uniprotIds[i], i, self.pagination.current - 1, feature_idx);
+		}).result.then(function(cdsTerms) {
+			for(var i = 0; i < cdsTerms.length; i++) {
+            	autoCds(cdsTerms[i], i, self.pagination.current - 1, feature_idx);
             }
 			search = false;
         }); 
@@ -339,26 +339,60 @@ partsGenieApp.controller("partsGenieCtrl", ["$scope", "$timeout", "$uibModal", "
 		return array;
 	};
 	
-	autoUniprot = function(uniprotId, idx, initial_idx, feature_idx) {
+	autoCds = function(cdsTerm, idx, initial_idx, feature_idx) {
 		search = true;
 		
-		PartsGenieService.searchUniprot(uniprotId).then(
+		const uniprotRegex = /^[OPQ][0-9][A-Z0-9]{3}[0-9]|[A-NR-Z][0-9]([A-Z][A-Z0-9]{2}[0-9]){1,2}$/g;
+		const aaSeqRegex = /^[ACDEFGHIKLMNPQRSTVWY]+$/g;
+		
+		if(uniprotRegex.test(cdsTerm)) {
+			PartsGenieService.searchUniprot(cdsTerm).then(
 				function(resp) {
-					var curr_design = null;
-					
-					if(idx > 0) {
-						curr_design = self.copyDesign();
-					}
-					else {
-						curr_design = self.query.designs[initial_idx]
+					for(entry_idx in resp.data) {
+						if(resp.data[entry_idx]["Entry"] == cdsTerm) {
+							updateFeature(resp.data[0], idx, initial_idx, feature_idx);
+							return;
+						}
 					}
 					
-					UniprotService.updateFeature(curr_design.features[feature_idx], resp.data[0]);
-					search = false;
+					ErrorService.open("Uniprot search unable to find " + cdsTerm + ".");
 				},
 				function(errResp) {
+					ErrorService.open(errResp.data.message);
 					search = false;
 				});
+		}
+		else {
+			match = aaSeqRegex.test(cdsTerm.toUpperCase())
+			
+			if(match) {
+				data = {
+					"Entry name": "CDS" + idx,
+					"Sequence": cdsTerm.toUpperCase()
+					};
+				
+				updateFeature(data, idx, initial_idx, feature_idx);
+			}
+			else {
+				ErrorService.open(cdsTerm + " not recognised as Uniprot id or amino acid sequence.");
+			}
+			
+			search = false;
+		}
+	}
+	
+	updateFeature = function(data, idx, initial_idx, feature_idx) {
+		var curr_design = null;
+		
+		if(idx > 0) {
+			curr_design = self.copyDesign();
+		}
+		else {
+			curr_design = self.query.designs[initial_idx]
+		}
+		
+		UniprotService.updateFeature(curr_design.features[feature_idx], data);
+		search = false;
 	}
 	
 	setValidity = function() {

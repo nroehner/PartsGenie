@@ -10,7 +10,7 @@ designApp.directive("designPanel", function($timeout) {
     		removeDesign: "&",
     		addFeature: "&",
     		copyFeature: "&",
-    		bulkUniprot: "&",
+    		bulkCds: "&",
     		valid: "&",
     		pagination: "="
     	},

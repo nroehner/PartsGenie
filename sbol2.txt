@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:prov="http://www.w3.org/ns/prov#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:sys-bio="http://sys-bio.org#" xmlns:sbol="http://sbols.org/v2#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <sbol:Sequence rdf:about="http://examples.org/Sequence/_7acbd66b_083c_44ae_baca_1633bd467a85/1">
+    <sbol:displayId>_7acbd66b_083c_44ae_baca_1633bd467a85</sbol:displayId>
+    <sbol:elements>TCAACCTACGCCTCGGCATCTAGG</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+    <sbol:persistentIdentity rdf:resource="http://examples.org/Sequence/_7acbd66b_083c_44ae_baca_1633bd467a85"/>
+    <sbol:version>1</sbol:version>
+  </sbol:Sequence>
+  <sbol:ComponentDefinition rdf:about="http://examples.org/ComponentDefinition/_ca1b7b48_7e8f_40c0_a9ce_b5b629caf57c/1">
+    <dcterms:description>Part</dcterms:description>
+    <dcterms:title>Part - Sequence of defined melting temperature</dcterms:title>
+    <sbol:displayId>_ca1b7b48_7e8f_40c0_a9ce_b5b629caf57c</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://examples.org/ComponentDefinition/_ca1b7b48_7e8f_40c0_a9ce_b5b629caf57c"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000804"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:version>1</sbol:version>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://examples.org/ComponentDefinition/_ca1b7b48_7e8f_40c0_a9ce_b5b629caf57c/_918a0cdd_45ad_4e1f_bfb8_9e162888bad2/1">
+        <dcterms:title>Sequence of defined melting temperature</dcterms:title>
+        <sbol:displayId>_918a0cdd_45ad_4e1f_bfb8_9e162888bad2</sbol:displayId>
+        <sbol:persistentIdentity rdf:resource="http://examples.org/ComponentDefinition/_ca1b7b48_7e8f_40c0_a9ce_b5b629caf57c/_918a0cdd_45ad_4e1f_bfb8_9e162888bad2"/>
+        <sbol:role rdf:resource="http://identifiers.org/so/SO:0000143"/>
+        <sbol:version>1</sbol:version>
+        <sbol:location>
+          <sbol:Range rdf:about="http://examples.org/ComponentDefinition/_ca1b7b48_7e8f_40c0_a9ce_b5b629caf57c/_918a0cdd_45ad_4e1f_bfb8_9e162888bad2/_6cdf710d_4f07_4d5f_b43d_26354d1734e8/1">
+            <sbol:displayId>_6cdf710d_4f07_4d5f_b43d_26354d1734e8</sbol:displayId>
+            <sbol:end>24</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+            <sbol:persistentIdentity rdf:resource="http://examples.org/ComponentDefinition/_ca1b7b48_7e8f_40c0_a9ce_b5b629caf57c/_918a0cdd_45ad_4e1f_bfb8_9e162888bad2/_6cdf710d_4f07_4d5f_b43d_26354d1734e8"/>
+            <sbol:start>1</sbol:start>
+            <sbol:version>1</sbol:version>
+          </sbol:Range>
+        </sbol:location>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+  </sbol:ComponentDefinition>
+</rdf:RDF>
