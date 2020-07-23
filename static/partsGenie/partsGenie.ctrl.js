@@ -195,7 +195,7 @@ partsGenieApp.controller("partsGenieCtrl", ["$scope", "$timeout", "$uibModal", "
 		return copiedDesign;
 	};
 	
-	self.bulkCds = function(feature_idx) {
+	self.bulkCds = function(event, feature_idx) {
 		search = true;
 		
 		$uibModal.open({
@@ -210,7 +210,9 @@ partsGenieApp.controller("partsGenieCtrl", ["$scope", "$timeout", "$uibModal", "
             	autoCds(cdsTerms[i], i, self.pagination.current - 1, feature_idx);
             }
 			search = false;
-        }); 
+        });
+		
+		event.stopPropagation();
 	}
 	
 	self.removeDesign = function() {

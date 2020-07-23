@@ -51,7 +51,7 @@
 						<div class="glyphicon glyphicon-remove pull-right glyphicon-grey glyphicon-small" data-ng-click="query().designs[pagination.current - 1].features.splice($index, 1)">
 						</div>
 						<div class="glyphicon glyphicon-copy pull-left glyphicon-grey glyphicon-small"
-							data-ng-click="bulkCds({args: $index})"
+							data-ng-click="bulkCds({event: $event, feature_idx: $index})"
 							data-ng-if="feature.typ == 'http://identifiers.org/so/SO:0000316' && !feature.temp_params.fixed">
 						</div>
 					</div>
