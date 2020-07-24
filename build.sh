@@ -1,0 +1,1 @@
+docker build -f Dockerfile-non-google -t partsgenie .
