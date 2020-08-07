@@ -5,6 +5,7 @@ uniprotApp.factory("UniprotService", ["$uibModal", function($uibModal) {
 		feature.name = selected["Entry name"];
 		feature.temp_params.aa_seq = selected.Sequence;
 		feature.temp_params.orig_seq = selected.Sequence;
+		feature.temp_params.valid = true;
 		
 		if(selected.hasOwnProperty("Protein names") && selected.hasOwnProperty("Organism")) {
 			feature.desc = selected["Protein names"].join(", ") + " (" + selected["Organism"] + ")";
