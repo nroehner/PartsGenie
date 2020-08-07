@@ -69,6 +69,14 @@
 					</textarea>
 				</div>
 			</div>
+			<div class="form-group" data-ng-show="selected().temp_params.required.indexOf('stop_codon') !== -1">
+				<label class="col-xs-4 col-form-label">Stop codon?</label>
+				<div class="col-xs-8">
+					<input type="checkbox" class="form-check-input"
+						data-ng-model="selected().temp_params.stop_codon"
+						placeholder="Stop codon"/>
+				</div>
+			</div>
 			<div class="form-group" data-ng-show="selected().temp_params.required.indexOf('prot') !== -1 && isAmbiguousSeq({query: selected().temp_params.aa_seq})">
 				<div class="col-xs-4"></div>
 				<div class="col-xs-8">
