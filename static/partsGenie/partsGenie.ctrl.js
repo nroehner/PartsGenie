@@ -124,7 +124,7 @@ partsGenieApp.controller("partsGenieCtrl", ["$scope", "$timeout", "$uibModal", "
 			name: "CDS",
 			temp_params: {
 				fixed: false,
-				required: ["name", "prot", "stop_codon"],
+				required: ["name", "prot"],
 				valid: false,
 				stop_codon: true,
 				id: "_7"
@@ -135,9 +135,8 @@ partsGenieApp.controller("partsGenieCtrl", ["$scope", "$timeout", "$uibModal", "
 			name: "Fixed coding sequence",
 			temp_params: {
 				fixed: true,
-				required: ["name", "seq", "stop_codon"],
+				required: ["name", "seq"],
 				valid: false,
-				stop_codon: true,
 				id: "_8"
 			}
 		},

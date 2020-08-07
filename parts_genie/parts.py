@@ -185,7 +185,7 @@ class PartsSolution():
                 feature['temp_params']['aa_seq'] = \
                     ''.join(feature['temp_params']['aa_seq'].upper().split())
 
-                if feature['temp_params']['aa_seq'][-1] != '*':
+                if feature['temp_params']['stop_codon']:
                     feature['temp_params']['aa_seq'] += '*'
 
                 feature['links'].append(
