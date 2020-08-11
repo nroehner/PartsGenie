@@ -20,7 +20,7 @@ from Bio import Restriction
 from flask import Flask, jsonify, request, Response
 from werkzeug.utils import secure_filename
 
-from genegeniebio.utils import ice_utils, net_utils, uniprot_utils
+from genegeniebio.utils import dna_utils, ice_utils, net_utils, uniprot_utils
 from ice import export
 import manager
 import organisms
@@ -194,8 +194,13 @@ def search_uniprot(query):
 @app.route('/export', methods=['POST'])
 def export_order():
     '''Export order.'''
-    ice_client = _connect_ice(request)
     data = json.loads(request.data)['designs']
+
+    if data[0]['typ'] == dna_utils.SO_PLASMID:
+        ice_client = _connect_ice(request)
+    else:
+        ice_client = None
+
     dfs = export.export(ice_client, data)
 
     return _save_export(dfs)
