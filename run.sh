@@ -1,1 +1,1 @@
-docker run -d -p 80:80 -p 443:443 -p 5000:5000 partsgenie
+docker run -d -p $1:5000 partsgenie
