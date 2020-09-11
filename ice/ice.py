@@ -48,8 +48,9 @@ class IceThread(AbstractThread):
                                'ice_id': str(entry_id)}
                          for key, entry_id in zip(
                              keys,
-                    self.__write_design(result, ice_client, dna_writer))
-                    if entry_id}
+                             self.__write_design(result, ice_client,
+                                                 dna_writer))
+                         if entry_id}
 
                 self._results.append(links)
                 iteration += 1

@@ -1,4 +1,4 @@
-iceApp.controller("iceInstanceCtrl", ["$uibModalInstance", "ICEService", "TypeaheadService", function($uibModalInstance, ICEService, TypeaheadService) {
+iceApp.service("TypeaheadService", function () { /* ... */ }).controller("iceInstanceCtrl", ["$uibModalInstance", "ICEService", "TypeaheadService", function($uibModalInstance, ICEService, TypeaheadService) {
 	var self = this;
 	
 	self.ice = function() {
