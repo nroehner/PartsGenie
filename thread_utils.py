@@ -1,5 +1,5 @@
 '''
-PartsGenie (c) GeneGenie Bioinformatics Ltd. 2020
+PartsGenie (c) University of Liverpool 2020
 
 All rights reserved.
 
@@ -7,6 +7,7 @@ All rights reserved.
 '''
 # pylint: disable=too-few-public-methods
 from threading import Thread
+
 from genegeniebio.utils import job_utils
 
 

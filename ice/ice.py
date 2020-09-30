@@ -1,5 +1,5 @@
 '''
-PartsGenie (c) GeneGenie Bioinformatics Ltd. 2020
+PartsGenie (c) University of Liverpool 2020
 
 All rights reserved.
 
@@ -8,7 +8,6 @@ All rights reserved.
 # pylint: disable=too-few-public-methods
 # pylint: disable=too-many-arguments
 from genegeniebio.utils import dna_utils, ice_utils, net_utils
-
 from thread_utils import AbstractThread
 
 

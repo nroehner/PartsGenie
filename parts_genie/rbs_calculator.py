@@ -1,5 +1,5 @@
 '''
-PartsGenie (c) GeneGenie Bioinformatics Ltd. 2020
+PartsGenie (c) University of Liverpool 2020
 
 All rights reserved.
 
@@ -15,8 +15,8 @@ import random
 import re
 
 from Bio.Seq import Seq
-from genegeniebio.utils import seq_utils
 
+from genegeniebio.utils import seq_utils
 from parts_genie.nucl_acid_utils import NuclAcidCalcRunner
 
 

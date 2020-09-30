@@ -1,5 +1,5 @@
 '''
-PartsGenie (c) GeneGenie Bioinformatics Ltd. 2020
+PartsGenie (c) University of Liverpool 2020
 
 All rights reserved.
 
@@ -9,7 +9,6 @@ All rights reserved.
 # pylint: disable=invalid-name
 # pylint: disable=wrong-import-order
 from genegeniebio.utils import dna_utils, ice_utils
-
 import pandas as pd
 
 

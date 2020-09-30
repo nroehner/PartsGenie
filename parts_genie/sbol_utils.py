@@ -1,12 +1,13 @@
 '''
-PartsGenie (c) GeneGenie Bioinformatics Ltd. 2020
+PartsGenie (c) University of Liverpool 2020
 
 All rights reserved.
 
 @author:  neilswainston
 '''
-from genegeniebio.utils import dna_utils, uniprot_utils
 from sbol import Document, SO_CDS, SO_RBS
+
+from genegeniebio.utils import dna_utils, uniprot_utils
 
 
 def to_query(filename, taxonomy_id):

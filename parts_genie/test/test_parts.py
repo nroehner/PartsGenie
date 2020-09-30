@@ -1,5 +1,5 @@
 '''
-PartsGenie (c) GeneGenie Bioinformatics Ltd. 2020
+PartsGenie (c) University of Liverpool 2020
 
 All rights reserved.
 
@@ -12,8 +12,8 @@ import os
 import time
 import unittest
 
-from parts_genie.parts import PartsThread
 from parts_genie import sbol_utils
+from parts_genie.parts import PartsThread
 
 
 class TestPartsThread(unittest.TestCase):

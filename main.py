@@ -1,5 +1,5 @@
 '''
-PartsGenie (c) GeneGenie Bioinformatics Ltd. 2020
+PartsGenie (c) University of Liverpool 2020
 
 All rights reserved.
 
@@ -24,6 +24,8 @@ from genegeniebio.utils import dna_utils, ice_utils, net_utils, uniprot_utils
 from ice import export
 import manager
 import organisms
+
+
 # from codon_genie import codon_utils
 # Configuration:
 SECRET_KEY = str(uuid.uuid4())
