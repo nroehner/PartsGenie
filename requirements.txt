@@ -3,4 +3,4 @@ pandas
 Flask
 gunicorn
 pySBOL
-git+https://github.com/neilswainston/genegeniebio-utils
+git+https://github.com/neilswainston/liv-utils
