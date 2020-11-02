@@ -7,7 +7,7 @@ All rights reserved.
 '''
 from sbol import Document, SO_CDS, SO_RBS
 
-from genegeniebio.utils import dna_utils, uniprot_utils
+from liv_utils import dna_utils, uniprot_utils
 
 
 def to_query(filename, taxonomy_id):

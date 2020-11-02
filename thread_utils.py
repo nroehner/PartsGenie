@@ -8,7 +8,7 @@ All rights reserved.
 # pylint: disable=too-few-public-methods
 from threading import Thread
 
-from genegeniebio.utils import job_utils
+from liv_utils import job_utils
 
 
 class AbstractThread(job_utils.JobThread):
@@ -22,14 +22,16 @@ class AbstractThread(job_utils.JobThread):
 
     def _fire_designs_event(self, status, iteration, message=''):
         '''Fires an event.'''
-        event = {'update': {'status': status,
-                            'message': message,
-                            'progress': float(iteration) /
-                            len(self._query['designs']) * 100,
-                            'iteration': iteration,
-                            'max_iter': len(self._query['designs'])},
-                 'query': self._query
-                 }
+        event = {
+            'update': {
+                'status': status,
+                'message': message,
+                'progress':
+                float(iteration) / len(self._query['designs']) * 100,
+                'iteration': iteration,
+                'max_iter': len(self._query['designs'])},
+            'query': self._query
+        }
 
         if status == 'finished':
             event['result'] = self._results

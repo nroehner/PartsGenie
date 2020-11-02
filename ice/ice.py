@@ -7,7 +7,7 @@ All rights reserved.
 '''
 # pylint: disable=too-few-public-methods
 # pylint: disable=too-many-arguments
-from genegeniebio.utils import dna_utils, ice_utils, net_utils
+from liv_utils import dna_utils, ice_utils, net_utils
 from thread_utils import AbstractThread
 
 

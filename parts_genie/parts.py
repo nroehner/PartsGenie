@@ -13,8 +13,8 @@ import copy
 from itertools import product
 import math
 
-from genegeniebio.utils import codon_utils, dna_utils, seq_utils
-from genegeniebio.utils.optim.sim_ann import SimulatedAnnealer
+from liv_utils import codon_utils, dna_utils, seq_utils
+from liv_utils.optim.sim_ann import SimulatedAnnealer
 from parts_genie import rbs_calculator, vienna_utils
 
 

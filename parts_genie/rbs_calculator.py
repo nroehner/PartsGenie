@@ -5,6 +5,7 @@ All rights reserved.
 
 @author:  neilswainston
 '''
+# pylint: disable=bad-continuation
 # pylint: disable=too-many-arguments
 # pylint: disable=too-many-branches
 # pylint: disable=too-many-locals
@@ -16,7 +17,7 @@ import re
 
 from Bio.Seq import Seq
 
-from genegeniebio.utils import seq_utils
+from liv_utils import seq_utils
 from parts_genie.nucl_acid_utils import NuclAcidCalcRunner
 
 
@@ -474,9 +475,10 @@ class RbsCalculator():
 
         offset = diff - begin
 
-        spacing = random.choice(range(max(
-            0, offset + self.__optimal_spacing - max_nonoptimal_spacing),
-            offset + self.__optimal_spacing + max_nonoptimal_spacing))
+        spacing = random.choice(
+            range(max(
+                0, offset + self.__optimal_spacing - max_nonoptimal_spacing),
+                offset + self.__optimal_spacing + max_nonoptimal_spacing))
 
         rbs.extend([random.choice(seq_utils.NUCLEOTIDES)
                     for _ in range(spacing)])

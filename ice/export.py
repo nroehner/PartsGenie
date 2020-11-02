@@ -5,10 +5,11 @@ All rights reserved.
 
 @author:  neilswainston
 '''
+# pylint: disable=bad-continuation
 # pylint: disable=consider-using-set-comprehension
 # pylint: disable=invalid-name
 # pylint: disable=wrong-import-order
-from genegeniebio.utils import dna_utils, ice_utils
+from liv_utils import dna_utils
 import pandas as pd
 
 
@@ -22,10 +23,10 @@ def export(ice_client, data):
         return _export_dominoes(ice_client, data)
 
     # else assume parts:
-    return _export_parts(data)
+    return _export_parts(ice_client, data)
 
 
-def _export_parts(data):
+def _export_parts(ice_client, data):
     '''Export parts.'''
     df = pd.DataFrame(data)
     df.rename(columns={'name': 'Name',
@@ -33,8 +34,10 @@ def _export_parts(data):
                        'desc': 'Description'}, inplace=True)
 
     # Get ICE ids:
-    df['Part ID'] = df['links'].apply(lambda link: _get_ice_id(link, 0))
-    df['Cloned ICE ID'] = df['links'].apply(lambda link: _get_ice_id(link, 1))
+    df['Part ID'] = df['links'].apply(
+        lambda link: _get_ice_id(ice_client, link, 0))
+    df['Cloned ICE ID'] = df['links'].apply(
+        lambda link: _get_ice_id(ice_client, link, 1))
 
     # Return selected columns:
     df = df[['Part ID', 'Cloned ICE ID', 'Name', 'Sequence', 'Description']]
@@ -73,10 +76,10 @@ def _export_dominoes(ice_client, data):
     return [dominoes_df, mapping_df]
 
 
-def _get_ice_id(link, idx):
+def _get_ice_id(ice_client, link, idx):
     '''Get ICE id.'''
     if idx < len(link):
-        return ice_utils.get_ice_id(link[idx].split('/')[-1])
+        return ice_client.get_ice_id(link[idx].split('/')[-1])
 
     return None
 

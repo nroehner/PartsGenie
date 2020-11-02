@@ -5,7 +5,7 @@ All rights reserved.
 
 @author:  neilswainston
 '''
-
+# pylint: disable=bad-continuation
 import json
 import time
 

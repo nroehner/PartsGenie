@@ -9,7 +9,7 @@ All rights reserved.
 # pylint: disable=wrong-import-order
 import os.path
 
-from genegeniebio.utils import codon_utils, ncbi_tax_utils
+from liv_utils import codon_utils, ncbi_tax_utils
 import pandas as pd
 
 
