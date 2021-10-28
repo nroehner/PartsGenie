@@ -1,0 +1,14 @@
+name: parts_genie
+channels:
+  - conda-forge
+dependencies:
+  - python=3.7
+  - cython
+  - pandas
+  - flask
+  - gunicorn
+  - bioconda::liv_utils
+  - bioconda::viennarna
+  - pip
+  - pip:
+    - pysbol
