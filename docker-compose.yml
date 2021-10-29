@@ -8,11 +8,12 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-conda
+    restart: always
     volumes:
       - $PWD:/app:ro
     ports:
       - ${PORT}:5000
-    command: conda run -n parts_genie gunicorn -t 3600 -b :5000 --chdir /app main:app
+    command: conda run -n parts_genie gunicorn --threads 4 -t 7200 -b :5000 --chdir /app main:app
     networks:
       - partsgenie
 
