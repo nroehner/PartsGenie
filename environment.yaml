@@ -9,4 +9,4 @@ dependencies:
   - gunicorn
   - bioconda::liv_utils
   - bioconda::viennarna
-  - sbml2sbol
+  - sbml2sbol>=0.1.13
