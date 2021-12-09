@@ -9,6 +9,4 @@ dependencies:
   - gunicorn
   - bioconda::liv_utils
   - bioconda::viennarna
-  - pip
-  - pip:
-    - pysbol
+  - sbml2sbol

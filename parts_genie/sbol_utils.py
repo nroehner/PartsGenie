@@ -5,7 +5,7 @@ All rights reserved.
 
 @author:  neilswainston
 '''
-from sbol import Document, SO_CDS, SO_RBS
+from sbml2sbol.sbol import Document, SO_CDS, SO_RBS
 
 from liv_utils import dna_utils, uniprot_utils
 
