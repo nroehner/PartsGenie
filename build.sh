@@ -1,1 +1,1 @@
-docker build -f Dockerfile-non-google -t partsgenie .
+docker build -f Dockerfile-conda -t partsgenie .
